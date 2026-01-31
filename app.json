@@ -4,10 +4,10 @@
     "slug": "warehouse-scanner",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/icon.svg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/splash.png",
+      "image": "./src/assets/splash.svg",
       "resizeMode": "contain",
       "backgroundColor": "#1976D2"
     },
@@ -23,7 +23,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/adaptive-icon.svg",
         "backgroundColor": "#1976D2"
       },
       "package": "com.warehousescanner",
@@ -32,7 +32,7 @@
       ]
     },
     "web": {
-      "favicon": "./src/assets/favicon.png"
+      "favicon": "./src/assets/favicon.svg"
     },
     "plugins": [
       [
