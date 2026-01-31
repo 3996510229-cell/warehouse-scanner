@@ -16,32 +16,18 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.warehousescanner",
-      "infoPlist": {
-        "NSCameraUsageDescription": "我们需要访问您的相机来扫描物料条码，以便记录库存数量。"
-      }
+      "bundleIdentifier": "com.warehousescanner"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.svg",
         "backgroundColor": "#1976D2"
       },
-      "package": "com.warehousescanner",
-      "permissions": [
-        "CAMERA"
-      ]
+      "package": "com.warehousescanner"
     },
     "web": {
       "favicon": "./src/assets/favicon.svg"
     },
-    "plugins": [
-      [
-        "expo-camera",
-        {
-          "cameraPermission": "我们需要访问您的相机来扫描物料条码，以便记录库存数量。"
-        }
-      ]
-    ],
     "extra": {
       "eas": {
         "projectId": "0e38552a-784b-437b-bea5-2f4ff5a092e4"
