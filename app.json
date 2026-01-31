@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "仓库扫码",
+    "name": "Warehouse Scanner",
     "slug": "warehouse-scanner",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,9 +28,7 @@
       },
       "package": "com.warehousescanner",
       "permissions": [
-        "CAMERA",
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "CAMERA"
       ]
     },
     "web": {
@@ -40,7 +38,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "我们需要访问您的相机来扫描物料条码。"
+          "cameraPermission": "我们需要访问您的相机来扫描物料条码，以便记录库存数量。"
         }
       ]
     ],
