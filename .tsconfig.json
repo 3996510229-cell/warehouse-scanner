@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "react-native-config",
+    "module:react-native-dotenv"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}

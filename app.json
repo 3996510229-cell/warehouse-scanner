@@ -1,0 +1,54 @@
+{
+  "expo": {
+    "name": "仓库扫码",
+    "slug": "warehouse-scanner",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1976D2"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.warehousescanner",
+      "infoPlist": {
+        "NSCameraUsageDescription": "我们需要访问您的相机来扫描物料条码，以便记录库存数量。"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#1976D2"
+      },
+      "package": "com.warehousescanner",
+      "permissions": [
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "我们需要访问您的相机来扫描物料条码。"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0e38552a-784b-437b-bea5-2f4ff5a092e4"
+      }
+    },
+    "owner": "george222"
+  }
+}

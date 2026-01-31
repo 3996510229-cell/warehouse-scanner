@@ -1,0 +1,67 @@
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, '13.0'
+prepare_react_native_project!
+
+# If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
+# Because `react-native-flipper` depends on (FlipperKit, ...) that will be loaded
+# and all its FatalError are ignored due to debug builds. Having the option to remove flipper
+# is critical to address build issues.
+# Setting `NO_FLIPPER=1` will stop loading Flipper and runtime errors will be ignored.
+# Note that if you have set `NO_FLIPPER=1` globally, it will apply to all configs automatically.
+# More info at https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/cocoapods/flipper.rb#L154
+flipper_config = ENV['NO_FLIPPER'] == '1' ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
+
+target 'warehouse-scanner' do
+  config = use_native_modules!
+
+  # Flags change depending on the env values.
+  flags = get_default_flags()
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => flags[:hermes_enabled],
+    :fabric_enabled => flags[:fabric_enabled],
+    # An absolute path to your application root.
+    :app_path => "#{Dir.pwd}/.."
+  )
+
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work
+  # and you should disable the next line with `FlipperConfiguration.disabled`
+  # unless you are using a custom Flipper config or have `NO_FLIPPER` set globally.
+  # Learn more at https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/cocoapods/flipper.rb#L122-L136
+  use_flipper!('Flipper' => flipper_config)
+
+  post_install do |installer|
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L237-L249
+    react_native_post_install(
+      installer,
+      # Set `mac_catalyst_enabled` to `true` in order to apply patches
+      # necessary for Mac Catalyst builds
+      :mac_catalyst_enabled => false
+    )
+
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/cocoapods/utils.rb#L56
+    # This is necessary for Xcode 14, because it signs build scripts in a way that
+    # cause a build error when a development team is not specified.
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+      end
+    end
+  end
+end

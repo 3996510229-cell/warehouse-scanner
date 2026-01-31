@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- We use a custom DataExtractionRules file to disable data extraction for the app.
+         This prevents the app from being restored from a backup on a different device. -->
+    <full-backup-content>
+        <!-- Disable automatic backup -->
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </full-backup-content>
+</resources>
