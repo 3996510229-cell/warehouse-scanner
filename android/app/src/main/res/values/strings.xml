@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">仓库扫码</string>
-    <color name="primary">#1976D2</color>
-    <color name="accent">#FF5722</color>
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-</resources>
